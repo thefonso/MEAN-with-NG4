@@ -295,6 +295,8 @@ home.component.html
 
 ng build
 
+<<<<<<< HEAD
+=======
 
 ## VIDEO CLASS
 
@@ -447,3 +449,4 @@ export class VideoCenterComponent implements OnInit {
 
 }
 ```
+>>>>>>> dev
