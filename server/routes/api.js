@@ -52,4 +52,22 @@ router.post('/video', function(req,res){
   });
 });
 
+
+router.put('/video/:id', function (req, res) {
+  console.log('Update a video');
+  Video.findByIdAndUpdate(req.params.id,
+    {
+      $set: {title: req.body.title, url: req.body.url, description: req.body.description}
+    },
+    {
+      new: true
+    },
+    function(err, updatedVideo){
+      if(err){
+        res.send("Error updating video");
+      }else{
+        res.json(updatedVideo);
+      }
+    });
+});
 module.exports = router;
