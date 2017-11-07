@@ -367,9 +367,83 @@ video-list.component.html
 
 ```
 <ul class="nav nav-pills nav-stacked">
-  <li *ngFor="let video of videos"><a>{{video.title}}</a></li>
+  <li (click)="onSelect(video)" *ngFor="let video of videos"><a>{{video.title}}</a></li>
 </ul>
 
 ```
 
-ng build
+updating video-list.component.ts
+
+```
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Video } from '../video';
+
+@Component({
+  selector: 'video-list',
+  templateUrl: './video-list.component.html',
+  styleUrls: ['./video-list.component.css']
+})
+export class VideoListComponent implements OnInit {
+
+  @Input() videos;
+  @Output() SelectedVideo;
+  public SelectVideo = new EventEmitter();
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  onselect(vid: Video) {
+    this.SelectVideo.emit(vid);
+  }
+}
+
+```
+
+now include the event in video-center.component.html
+
+```
+<div class="row">
+  <div class="col-sm-9">
+    <video-detail></video-detail>
+  </div>
+  <div class="col-sm-3">
+    <video-list (SelectedVideo)="onSelectVideo($event)" [videos]="videos"></video-list>
+  </div>
+</div>
+
+```
+
+now let's access the particular video
+
+video-center.component.ts
+
+```
+import { Component, OnInit } from '@angular/core';
+import { Video} from '../video';
+
+@Component({
+  selector: 'app-video-center',
+  templateUrl: './video-center.component.html',
+  styleUrls: ['./video-center.component.css']
+})
+export class VideoCenterComponent implements OnInit {
+  videos: Video[] = [
+    {'_id': '1', 'title': 'Title 1', 'url': 'url 1', 'description': 'desc 1'},
+    {'_id': '2', 'title': 'Title 2', 'url': 'url 2', 'description': 'desc 2'},
+    {'_id': '3', 'title': 'Title 3', 'url': 'url 3', 'description': 'desc 31'},
+    {'_id': '4', 'title': 'Title 4', 'url': 'url 4', 'description': 'desc 4'},
+  ];
+
+  selectedVideo: Video;
+  constructor() { }
+
+  ngOnInit() {
+  }
+  onSelectedVideo(video: any ) {
+    this.selectedVideo = video;
+    console.log(this.selectedVideo);
+  }
+
+}
+```
