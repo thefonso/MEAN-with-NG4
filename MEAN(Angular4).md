@@ -216,7 +216,7 @@ export class AppRoutingModule { }
 
 ```
 
-##Bootstrap
+## Bootstrap
 
 npm install --save bootstrap
 
@@ -228,7 +228,7 @@ npm install --save bootstrap
         "../node_modules/bootstrap/dist/css/bootstrap.min.css"
       ],
 ```
-##WORK THE UI
+## WORK THE UI
 
 src/app/app.component.html
 
@@ -249,7 +249,7 @@ src/app/app.component.html
 </div>
 
 ```
-##TESTING RESULTS SO FAR
+## TESTING RESULTS SO FAR
 
 so the server finds the changes ...
 
@@ -257,7 +257,7 @@ ng build
 
 Now open Localhost:3000 and you should see the UI change
 
-##MORE STUFF
+## MORE STUFF
 
 ng g c videoList
 
